@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Myo Vermittler</string>
+    <string name="action_settings" translatable="false">Einstellungen Myo</string>
+    <string name="my_myo">Mein Myo</string>
+    <string name="myo_message">Nur einen Moment, um das Myo-Gerät an Ihrer Wade einzurichten. Bitte verlängern Sie Ihre Wade.</string>
+    <string name="battery">Myo Akku:</string>
+    <string name="success_myo_setup">Suche erfolgreich. Myo Setup wird automatisch in 3 Sekunden geschlossen.</string>
+</resources>

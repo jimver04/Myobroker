@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015.
+  ~ Author:
+  ~ Matthias Urhahn (matthias.urhahn@rwth-aachen.de)
+  ~ Department:
+  ~ mHealth - Uniklinik RWTH-Aachen.
+
+  ~ Copyright (c) 2022.
+  ~ Author:
+  ~ Dimitrios Ververidis (ververid@iti.gr)
+  ~ Department:
+  ~ Infalia - Centre for Research and Technology Hellas
+
+  -->
+
+<com.infalia.myonabler.myobroker.MyoInfoView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    >
+
+    <TextView
+        android:id="@+id/tv_batterytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/battery"
+        android:layout_marginRight="10dp"
+        android:textColor="@android:color/holo_purple"
+        android:textSize="8pt" />
+
+    <TextView
+        android:id="@+id/tv_batterylevel"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_batterytext"
+        android:layout_alignBottom="@id/tv_batterytext"
+        android:textColor="@android:color/holo_purple"
+        android:textSize="8pt"
+        tools:text="00%" />
+
+
+    <TextView
+        android:id="@+id/tv_emg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_batterytext"
+        android:visibility="gone"
+        android:textColor="@android:color/holo_purple"
+        tools:text="EMG data" />
+
+    <TextView
+        android:id="@+id/tv_accl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_emg"
+        android:textColor="@android:color/holo_purple"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        tools:text="Accl data" />
+
+    <TextView
+        android:id="@+id/tv_gyro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_accl"
+        android:textColor="@android:color/holo_purple"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        tools:text="Gyro data" />
+
+    <TextView
+        android:id="@+id/tv_orientation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_gyro"
+        android:textColor="@android:color/holo_purple"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        tools:text="Orientation data" />
+
+
+
+    <TextView
+        android:id="@+id/tv_serialnumber"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imv_banner"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_purple"
+        android:visibility="invisible"
+        tools:text="Serial Number" />
+
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_serialnumber"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_purple"
+        android:visibility="invisible"
+        tools:text="AA:AA:AA:AA:AA:AA" />
+
+    <TextView
+        android:id="@+id/tv_firmware"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_purple"
+        android:layout_below="@id/tv_address"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        tools:text="Firmware: v0.0.0 - 0" />
+
+
+
+</com.infalia.myonabler.myobroker.MyoInfoView>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Myo Broker</string>
+    <string name="action_settings">Settings</string>
+    <string name="my_myo">My Myo</string>
+    <string name="myo_message">"Just a moment to setup Myo device at your calf. Please extend your calf. "</string>
+    <string name="battery">Myo Battery:</string>
+    <string name="success_myo_setup">Connection successful. Myo setup will close automatically in 3 secs.</string>
+</resources>
