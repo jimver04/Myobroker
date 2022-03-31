@@ -4,57 +4,55 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextToSpeech ttobj;
+    //private TextToSpeech ttobj;
+    private MediaPlayer mediaPlayer;
 
-    void speakInit(){
+    // Automatic Text-to-Speech is available only in mobile devices but not in OculusQuest 2
+    // So we have to synthesize in mobile devices and extracted manually from
+    // /data/data/com.infalia / instructions.wav
+    // and play it with media player
 
+    void auto_speakInit(){
 
+        //        // --------------- Manually set language -------
+        //        Configuration conf = getResources().getConfiguration();
+        //        conf.locale = new Locale("de");
+        //        DisplayMetrics metrics = new DisplayMetrics();
+        //        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        //        Resources resources = new Resources(getAssets(), metrics, conf);
+        //        String str = resources.getString(R.string.myo_message).toString();
+        //        Locale l = new Locale("de","DE");
+        //        ttobj.setLanguage(l);
+        //        //------------------
+        //
+        //          String str = resources.getString(R.string.myo_message).toString();
+        //
+        //         // Only for hearing with "speak"
+        //         ttobj.speak(str, TextToSpeech.QUEUE_FLUSH, null);
 
-//        // --------------- Manually set language -------
-//        Configuration conf = getResources().getConfiguration();
-//        conf.locale = new Locale("de");
-//        DisplayMetrics metrics = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-//        Resources resources = new Resources(getAssets(), metrics, conf);
-//        String str = resources.getString(R.string.myo_message).toString();
-//        //------------------
-//
-//        Locale l = new Locale("de","DE");
-//        ttobj.setLanguage(l);
-//        ttobj.speak(str, TextToSpeech.QUEUE_FLUSH, null);
+        //         // Save to a file with "synthesizeToFile"
+        //        File outputDir = this.getCacheDir(); // context being the Activity pointer
+        //        File outputFile = null;
+        //        try {
+        //            outputFile = File.createTempFile("instruction_german", ".wav", outputDir);
+        //            HashMap<String, String> params = new HashMap<>();
+        //            // This writes it to a file !!!!!!
+        //            ttobj.synthesizeToFile(str, params, outputFile.getAbsolutePath());
+        //            ttobj.setLanguage(l);
+        //        } catch (IOException e) {
+        //            e.printStackTrace();
+        //        }
 
-
-//        File outputDir = this.getCacheDir(); // context being the Activity pointer
-//        File outputFile = null;
-//        try {
-//            outputFile = File.createTempFile("instruction_german", ".wav", outputDir);
-//            HashMap<String, String> params = new HashMap<>();
-//            ttobj.synthesizeToFile(str, params, outputFile.getAbsolutePath());
-//            ttobj.setLanguage(l);
-
-        MediaPlayer.create(this, R.raw.instruction).start();
-
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
@@ -62,17 +60,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         registerBaseActivityReceiver();
-
-        ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    speakInit();
-                }
-            }
-        });
+        mediaPlayer = MediaPlayer.create(this, R.raw.instruction);
+        mediaPlayer.start();
      }
-    
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -101,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void registerBaseActivityReceiver() {
         registerReceiver(baseActivityReceiver, INTENT_FILTER);
+
     }
 
     @Override
