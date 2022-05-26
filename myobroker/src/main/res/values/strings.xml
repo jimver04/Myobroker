@@ -2,7 +2,20 @@
     <string name="app_name">Myo Broker</string>
     <string name="action_settings">Settings</string>
     <string name="my_myo">My Myo</string>
-    <string name="myo_message">"Just a moment to setup Myo device at your calf. Please extend your calf. "</string>
+    <string name="myo_message_calibrate1">Just a moment to setup Myo device at your calf.</string>
     <string name="battery">Myo Battery:</string>
-    <string name="success_myo_setup">Connection successful. Myo setup will close automatically in 3 secs.</string>
+    <string name="myo_find_success_message">Connection successful. Myo setup will close automatically in 3 seconds.</string>
+    <string name="try_again_myo_find_fail_message">Connection failed. Please try again το extend your calf.</string>
+    <string name="girl_wellcome_message_and_say_to_press_start">Welcome to the world of Myonabler. A beautiful park where we can spend some time and do some exercises to improve our daily lives. Press the start button to get started.</string>
+    <string name="girl_start_message">Welcome! My name is Anna, I am a gymnast and together we will do some exercises to improve our daily life. Our goal is to have a good time together and be able to improve some of our daily movements. You are in control of the exercises that we will do so that we can complete them based on your desires and abilities. To get started you need to select the exercise from the menu bar. Then I will do this exercise first so you can see what you need to do and then it is your turn. We can start when you feel ready.</string>
+    <string name="girl_exercise_sit">1. Sit towards the front edge of a sturdy chair. 2. Your knees should be bent and your feet should be flat on the floor and shoulder-width apart. Place your hands lightly on each side of the seat. Keep your back and neck as straight as possible, with your chest slightly forward. Breathe in slowly. Lean forward and slightly shift your weight to the front of your feet. 4. Breathe out as you slowly stand up. Use your hands as little as possible. 5. Stand and pause for a full breath in and out. 6. Breathe in as you sit down slowly. Tighten your core and abdominal muscles to control your lowering as much as possible. 7. Breathe out slowly</string>
+    <string name="girl_success_exercise">Congratulations! You have successfully completed the exercise. Try to remember the movements you made and apply them to the movements of your daily life.</string>
+    <string name="restart_exercise_single">You will have to try again to successfully complete this exercise. When you are ready to try again select again this exercise.</string>
+    <string name="girl_exercise_balance">1. Stand with your feet hip-width apart and your weight equally distributed on both legs. Place your hands on your hips. Lift your left leg off the floor and bend it back at the knee. 2. Hold the position as long as you can maintain good form, up to 30 seconds.3. Return to the starting position and repeat on the other side. As your balance improves, increase the number of repetitions.</string>
+    <string name="myo_message_calibrate2">"Please flex your calf. "</string>
+    <string name="girl_exercise_on_toe_tips">Stand with your feet shoulder width apart and back straight with hips facing forward. Raise up on your toes and then return to starting position, keep a smooth steady pace, make sure that you are breathing normal.</string>
+    <string name="bt_pause_text">Pause</string>
+    <string name="bt_start_text">Start</string>
+    <string name="bt_restart_text">Restart</string>
+    <string name="bt_exit_text">Exit</string>
 </resources>

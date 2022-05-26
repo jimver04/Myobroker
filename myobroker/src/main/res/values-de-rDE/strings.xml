@@ -3,7 +3,20 @@
     <string name="app_name">Myo Vermittler</string>
     <string name="action_settings" translatable="false">Einstellungen Myo</string>
     <string name="my_myo">Mein Myo</string>
-    <string name="myo_message">Nur einen Moment, um das Myo-Gerät an Ihrer Wade einzurichten. Bitte verlängern Sie Ihre Wade.</string>
+    <string name="myo_message_calibrate1">Nur einen Moment, um das Myo-Gerät an Ihrer Wade einzurichten.</string>
     <string name="battery">Myo Akku:</string>
-    <string name="success_myo_setup">Suche erfolgreich. Myo Setup wird automatisch in 3 Sekunden geschlossen.</string>
+    <string name="myo_find_success_message">Suche erfolgreich. Myo Setup wird automatisch in 3 Sekunden geschlossen.</string>
+    <string name="try_again_myo_find_fail_message">Myo nicht gefunden. Bitte versuchen noch mal um Ihre Wade einzurichten.</string>
+    <string name="girl_wellcome_message_and_say_to_press_start">Willkommen in der Welt von Myonabler. Ein wunderschöner Park, in dem wir einige Zeit verbringen, und einige Übungen machen können, um unser tägliches Leben zu verbessern. Drücken Sie die Starttaste, um loszugehen.</string>
+    <string name="girl_start_message">Willkommen! Mein Name ist Anna, ich bin Turnerin und zusammen werden wir einige Übungen machen, um unser tägliches Leben zu verbessern. Unser Ziel ist es, eine gute Zeit zusammen zu haben und einige unserer täglichen Bewegungen zu verbessern. Sie haben die Kontrolle über die Übungen, die wir durchführen, damit wir sie nach Ihren Wünschen und Fähigkeiten ausführen können. Zu Beginn müssen Sie die Übung in der Menüleiste auswählen. Dann mache ich zuerst diese Übung, damit Sie sehen können, was Sie tun müssen, und dann sind Sie dran. Wir können beginnen, wenn Sie sich bereit fühlen.</string>
+    <string name="girl_exercise_sit">1. Setzen Sie sich auf der vordere Rande eines stabilen Stuhls. Deine Knie sollten gebeugt sein und deine Füße sollten flach und schulterbreit auseinander auf dem Boden stehen. 2. Legen Sie Ihre Hände leicht auf jede Seite des Sitzes. Halten Sie Rücken und Nacken so gerade wie möglich, mit leicht nach vorne gerichteter Brust. 3. Atme langsam ein. Lehnen Sie sich nach vorne und verlagern Sie Ihr Gewicht leicht auf die Vorderseite Ihrer Füße. 4. Atmen Sie aus, während Sie langsam aufstehen. Verwenden Sie Ihre Hände so wenig wie möglich. 5. Stehen Sie auf und halten Sie inne, um tief ein- und auszuatmen. 6. Atmen Sie ein, während Sie sich langsam hinsetzen. Spannen Sie Ihre Kern- und Bauchmuskeln an, um Ihr Absenken so gut wie möglich zu kontrollieren. 7. Atmen Sie langsam aus</string>
+    <string name="girl_success_exercise">Sehr gut! Sie haben die Übung erfolgreich abgeschlossen. Versuchen Sie, sich an die Bewegungen zu erinnern, die Sie gemacht haben, und wenden Sie sie auf die Bewegungen Ihres täglichen Lebens an.</string>
+    <string name="restart_exercise_single">Sie müssen es erneut versuchen um diese Übung erfolgreich abzuschließen. Wenn Sie bereit sind noch mal zu versuchen, wählen Sie die dieser Übung wieder.</string>
+    <string name="girl_exercise_balance">1. Stellen Sie sich hüftbreit hin und verteilen Sie Ihr Gewicht gleichmäßig auf beide Beine. Legen Sie Ihre Hände auf Ihre Hüften. Heben Sie Ihr linkes Bein vom Boden ab und beugen Sie es am Knie nach hinten. 2. Halten Sie die Position so lange, wie Sie eine gute Form beibehalten können, bis zu 30 Sekunden. 3. Zurück in die Ausgangsposition und auf der anderen Seite wiederholen. Wenn sich Ihr Gleichgewicht verbessert, erhöhen Sie die Anzahl der Wiederholungen.</string>
+    <string name="myo_message_calibrate2">Bitte biegen Sie Ihre Wade.</string>
+    <string name="girl_exercise_on_toe_tips">Stellen Sie sich mit den Füßen schulterbreit auseinander und dem Rücken gerade hin, wobei die Hüften nach vorne zeigen. Stellen Sie sich auf die Zehenspitzen und kehren Sie dann in die Ausgangsposition zurück, halten Sie ein gleichmäßiges Tempo und achten Sie darauf, dass Sie normal atmen.</string>
+    <string name="bt_pause_text">Pause</string>
+    <string name="bt_start_text">Start</string>
+    <string name="bt_restart_text">Neu starten</string>
+    <string name="bt_exit_text">Ausgang</string>
 </resources>

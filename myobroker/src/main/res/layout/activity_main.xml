@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_height="match_parent">
 
     <TextView
@@ -21,13 +22,25 @@
          />
 
     <TextView
-        android:id="@+id/textView_hint"
+        android:id="@+id/textView_hint1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_below="@id/tv_title"
         android:gravity="center"
-        android:text="@string/myo_message"
+        android:text="@string/myo_message_calibrate1"
+        android:textColor="@android:color/holo_purple"
+        android:textSize="12pt" />
+
+    <TextView
+        android:id="@+id/textView_hint2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:visibility="invisible"
+        android:layout_below="@id/textView_hint1"
+        android:gravity="center"
+        android:text="@string/myo_message_calibrate2"
         android:textColor="@android:color/holo_purple"
         android:textSize="12pt" />
 
@@ -35,11 +48,22 @@
         android:id="@+id/imv_banner"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:layout_below="@id/textView_hint"
+        android:layout_below="@id/textView_hint2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:src="@drawable/myobroker_full_screen" />
+
+    <ImageView
+        android:id="@+id/imv_instructions"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_below="@id/textView_hint2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:src="@drawable/extend_calf4" />
+
 
 
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -48,6 +72,7 @@
           android:name="com.infalia.myonabler.myobroker.DebugFragment"
           tools:layout="@layout/fragment_debug"
           android:layout_width="match_parent"
+
           android:layout_height="match_parent">
 
 </fragment>

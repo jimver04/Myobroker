@@ -7,18 +7,19 @@ package com.infalia.myonabler.myobroker;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.infalia.myonabler.Myo;
 import com.infalia.myonabler.MyoCmds;
@@ -32,7 +33,7 @@ import com.infalia.myonabler.processor.imu.ImuProcessor;
 import com.infalia.myonabler.processor.imu.MotionEvent;
 import com.infalia.myonabler.processor.imu.MotionProcessor;
 
-import java.util.Locale;
+import java.io.IOException;
 
 /**
  * Debug view that takes a {@link Myo} object and displays it's data.
@@ -56,6 +57,9 @@ public class MyoInfoView extends RelativeLayout implements
     private MotionProcessor mMotionProcessor;
     Context ctx;
     private TextToSpeech ttobj2;
+    MediaPlayer player2;
+
+    private boolean isOQ2 = true;
 
     public MyoInfoView(Context context) {
         super(context);
@@ -68,6 +72,8 @@ public class MyoInfoView extends RelativeLayout implements
 
     public MyoInfoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -86,13 +92,46 @@ public class MyoInfoView extends RelativeLayout implements
         mGyroData = findViewById(R.id.tv_gyro);
         mAcclData = findViewById(R.id.tv_accl);
         mOrientationData = findViewById(R.id.tv_orientation);
+
+
+
+
+
+//        final Handler handler = new Handler(Looper.getMainLooper());
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Say2(R.string.myo_message_calibrate2);
+//            }
+//        }, 3000);
+
         super.onFinishInflate();
     }
 
-    // Speech success
-    void speakSuccess(){
-        String succStr= ctx.getString(R.string.success_myo_setup).toString();
-        ttobj2.speak(succStr, TextToSpeech.QUEUE_FLUSH, null);
+    // Say
+    void Say2(int resourceInt){
+
+        if (!isOQ2) {
+            String succStr = ctx.getString(resourceInt).toString();
+            ttobj2.speak(succStr, TextToSpeech.QUEUE_FLUSH, null);
+        } else {
+            try {
+                player2 = new MediaPlayer();
+                final AssetFileDescriptor afd = this.getResources().openRawResourceFd(resourceInt);
+                player2.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                afd.close();
+                player2.prepare();
+                player2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                player2.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -100,6 +139,7 @@ public class MyoInfoView extends RelativeLayout implements
 
         if (isInEditMode())
             return;
+
         mAttached = true;
         post(new Runnable() {
             @Override
@@ -212,17 +252,15 @@ public class MyoInfoView extends RelativeLayout implements
 
                             //Toast.makeText(ctx, ctx.getText(R.string.success_myo_setup), Toast.LENGTH_LONG).show();
 
-                            // Speech Success
-                            ttobj2 = new TextToSpeech(ctx, new TextToSpeech.OnInitListener() {
-                                @Override
-                                public void onInit(int status) {
-                                    if (status == TextToSpeech.SUCCESS) {
-                                        speakSuccess();
-                                    }
-                                }
-                            });
+                            // Say Success with voice
+//                            if (!isOQ2){
+//                                Say2(R.string.myo_find_success_message);
+//                            } else {
+//                                Say2(R.raw.myo_find_success_message);
+//                            }
 
- //                           Toast.makeText(ctx,  "Myo setup will close automatically in 3 secs.", Toast.LENGTH_LONG).show();
+
+                            // Toast.makeText(ctx,  "Myo setup will close automatically in 3 secs.", Toast.LENGTH_LONG).show();
 
                             getHandler().postDelayed(new Runnable() {
                                 @Override
@@ -242,12 +280,6 @@ public class MyoInfoView extends RelativeLayout implements
                 });
             mLastEmgUpdate = System.currentTimeMillis();
         }
-
-
-
-
-
-
     }
 
     private long mLastImuUpdate = 0;
