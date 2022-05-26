@@ -1,3 +1,14 @@
+This is an Android app that can be installed into Oculus Quest 2. It detects Myo device nearby and
+ transfers its signals to a specific Unreal application. The target is Exergaming with OQ2 and Myo.
+ 
+ 
+The App is based on a library developed by Aachen RWTH Uniklinik.
+ 
+ 
+  
+
+
+
 # myolib
 [ ![Download](https://api.bintray.com/packages/darken/maven/myolib/images/download.svg) ](https://bintray.com/darken/maven/myolib/_latestVersion)
 [![Coverage Status](https://coveralls.io/repos/github/d4rken/myolib/badge.svg)](https://coveralls.io/github/d4rken/myolib)
