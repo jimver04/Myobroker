@@ -19,11 +19,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Locale;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         registerBaseActivityReceiver();
 
-
-
-
         ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -50,25 +51,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        Log.w("Myonabler", "Start Voice");
         if(!isOQ2){
             Say(R.string.myo_message_calibrate1);
 
         } else{
-            Log.w("Myonabler", "Say calibrate 1 from wav");
             Say(R.raw.myo_message_calibrate1);
-
-
             final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+
+                    TextView textView_hint1 = findViewById(R.id.textView_hint1);
+                    textView_hint1.setVisibility(TextView.INVISIBLE);
+
+
+                    TextView textView_hint2 = findViewById(R.id.textView_hint2);
+                    textView_hint2.setVisibility(TextView.VISIBLE);
+
+                    GifImageView imv_animated_gif = findViewById(R.id.imv_animated_gif);
+                    imv_animated_gif.setVisibility(TextView.VISIBLE);
+
                     Say(R.raw.myo_message_calibrate2);
                     }
                 }, 3300);
         }
-
      }
 
     @Override

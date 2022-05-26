@@ -33,4 +33,5 @@ dependencies {
 //    compile 'eu.darken.myolib:myolib:0.0.2'
     // Change to use local library
     implementation project(':myolib')
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 }

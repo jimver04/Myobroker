@@ -52,19 +52,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:gravity="center"
+        android:visibility="gone"
         android:src="@drawable/myobroker_full_screen" />
 
-    <ImageView
-        android:id="@+id/imv_instructions"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/imv_animated_gif"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_below="@id/textView_hint2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:visibility="invisible"
-        android:src="@drawable/extend_calf4" />
-
-
+        android:src="@drawable/calf_animation" />
 
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
@@ -72,7 +71,6 @@
           android:name="com.infalia.myonabler.myobroker.DebugFragment"
           tools:layout="@layout/fragment_debug"
           android:layout_width="match_parent"
-
           android:layout_height="match_parent">
 
 </fragment>

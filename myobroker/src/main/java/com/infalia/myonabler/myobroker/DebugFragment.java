@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,10 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Logy.sLoglevel = Logy.VERBOSE;
+        Log.w("Myonabler", "onCreate DebugFrament");
 
+        mMyoConnector = new MyoConnector(getActivity());
+        mMyoConnector.scan(2000, mScannerCallback);
         super.onCreate(savedInstanceState);
     }
 
@@ -49,16 +53,19 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_debug, container, false);
+        Log.w("Myonabler", "DebugFrament onCreateView");
         mContainer = layout.findViewById(R.id.container);
         return layout;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        mMyoConnector = new MyoConnector(getActivity());
+
+
         super.onActivityCreated(savedInstanceState);
 
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+        // COARSE Location is needed for Bluetooth data
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         }
     }
@@ -66,22 +73,35 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
     private MyoConnector.ScannerCallback mScannerCallback = new MyoConnector.ScannerCallback() {
         @Override
         public void onScanFinished(final List<Myo> myos) {
+
+            Log.d("Myonabler", "DebugFragment ScannerCallback 1");
+
             if (mContainer.getHandler() == null)
                 return;
 
-            Logy.d(TAG, "MYOS:" + myos.size());
+            Log.d("Myonabler", "DebugFragment ScannerCallback 2");
+
+            Log.d(TAG, "MYOS:" + myos.size());
 
             mContainer.post(new Runnable() {
                 @Override
                 public void run() {
+
+                    Log.d("Myonabler", "DebugFragment ScannerCallback 3");
+
                     if (getView() == null)
                         return;
+
+                    Log.d("Myonabler", "DebugFragment ScannerCallback 4 ");
+
                     for (final Myo myo : myos) {
                         if (!mMyoViewMap.containsKey(myo)) {
                             MyoInfoView infoView = (MyoInfoView) LayoutInflater.from(getActivity()).inflate(R.layout.view_myoinfo, mContainer, false);
                             mMyoViewMap.put(myo, infoView);
                             infoView.setContextCustom(getActivity());
 
+
+                            Log.e("Myonabler", "Found");
 
                             myo.addConnectionListener(DebugFragment.this);
                             myo.connect();
@@ -93,6 +113,7 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
                             mContainer.addView(infoView);
                         }
                     }
+
                     if (mScanning) {
                         mMyoConnector.scan(2000, mScannerCallback);
                     }
@@ -106,13 +127,19 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
     @Override
     public void onResume() {
         mScanning = true;
-        mMyoConnector.scan(2000, mScannerCallback);
+        Log.d("Myonabler", "DebugFragment OnResume");
+
+
+
         super.onResume();
     }
 
     @Override
     public void onPause() {
+        Log.d("Myonabler", "DebugFragment Pause");
+
         mScanning = false;
+
         for (Myo myo : mMyoViewMap.keySet()) {
             myo.removeConnectionListener(this);
             myo.setConnectionSpeed(BaseMyo.ConnectionSpeed.BALANCED);
@@ -120,6 +147,7 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
             myo.writeMode(MyoCmds.EmgMode.NONE, MyoCmds.ImuMode.NONE, MyoCmds.ClassifierMode.DISABLED, null);
             myo.disconnect();
         }
+
         mContainer.removeAllViews();
         mMyoViewMap.clear();
         super.onPause();
@@ -127,6 +155,9 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
 
     @Override
     public void onConnectionStateChanged(final BaseMyo myo, BaseMyo.ConnectionState state) {
+
+        Log.d("Myonabler", "DebugFragment onConnectionStateChanged");
+
         if (getView() == null)
             return;
         if (state == BaseMyo.ConnectionState.DISCONNECTED) {
