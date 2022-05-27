@@ -65,6 +65,16 @@
         android:visibility="invisible"
         android:src="@drawable/calf_animation" />
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/green_tick"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/textView_hint2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:src="@drawable/green_tick" />
+
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           android:id="@+id/fragment"

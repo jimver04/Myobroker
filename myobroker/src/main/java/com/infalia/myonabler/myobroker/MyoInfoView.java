@@ -8,6 +8,7 @@ package com.infalia.myonabler.myobroker;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
@@ -35,6 +36,9 @@ import com.infalia.myonabler.processor.imu.MotionProcessor;
 
 import java.io.IOException;
 
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
+
 /**
  * Debug view that takes a {@link Myo} object and displays it's data.
  */
@@ -50,7 +54,7 @@ public class MyoInfoView extends RelativeLayout implements
     private TextView mBatteryLevel, mFirmware, mSerialNumber, mAddress;
     private TextView mEmgData, mOrientationData, mGyroData, mAcclData;
     private boolean mAttached = false;
-    private boolean isShowing = true;
+
     private EmgProcessor mEmgProcessor;
     private ImuProcessor mImuProcessor;
     private ClassifierProcessor mClassifierProcessor;
@@ -72,8 +76,6 @@ public class MyoInfoView extends RelativeLayout implements
 
     public MyoInfoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -92,10 +94,6 @@ public class MyoInfoView extends RelativeLayout implements
         mGyroData = findViewById(R.id.tv_gyro);
         mAcclData = findViewById(R.id.tv_accl);
         mOrientationData = findViewById(R.id.tv_orientation);
-
-
-
-
 
 //        final Handler handler = new Handler(Looper.getMainLooper());
 //        handler.postDelayed(new Runnable() {
@@ -181,12 +179,6 @@ public class MyoInfoView extends RelativeLayout implements
             }
         });
 
-
-
-
-
-
-
         super.onAttachedToWindow();
     }
 
@@ -226,7 +218,7 @@ public class MyoInfoView extends RelativeLayout implements
             getHandler().post(new Runnable() {
                 @Override
                 public void run() {
-                    mFirmware.setText("Firmware: " + version);
+                      mFirmware.setText("Firmware: " + version);
                 }
             });
     }
@@ -236,7 +228,7 @@ public class MyoInfoView extends RelativeLayout implements
     @Override
     public void onNewEmgData(final EmgData emgData) {
         if (System.currentTimeMillis() - mLastEmgUpdate > 10) {
-            if (getHandler() != null)
+            if (getHandler() != null) {
                 getHandler().post(new Runnable() {
                     @Override
                     public void run() {
@@ -248,20 +240,37 @@ public class MyoInfoView extends RelativeLayout implements
                         i.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                         ctx.sendBroadcast(i);
 
-                        if (isShowing) {
+                        if (((MainActivity)getActivity()).isOnTop) {
 
                             //Toast.makeText(ctx, ctx.getText(R.string.success_myo_setup), Toast.LENGTH_LONG).show();
 
                             // Say Success with voice
-//                            if (!isOQ2){
-//                                Say2(R.string.myo_find_success_message);
-//                            } else {
-//                                Say2(R.raw.myo_find_success_message);
-//                            }
+                            if (!isOQ2){
+                                Say2(R.string.myo_find_success_message);
+                            } else {
+                                Say2(R.raw.myo_find_success_message);
+                            }
 
+                            ((MainActivity)getActivity()).isOnTop = false;
 
+                            // Change Graphics
+                            GifImageView imv_animated_gif = getActivity().findViewById(R.id.imv_animated_gif);
+                            imv_animated_gif.setVisibility(GifImageView.GONE);
+
+                            // Show Green Tick
+                            final GifImageView green_tick = getActivity().findViewById(R.id.green_tick);
+                            green_tick.setVisibility(GifImageView.VISIBLE);
+
+                            final Handler handler = new Handler(Looper.getMainLooper());
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ((GifDrawable)green_tick.getDrawable()).stop();
+                                }
+                            }, 2000);
                             // Toast.makeText(ctx,  "Myo setup will close automatically in 3 secs.", Toast.LENGTH_LONG).show();
 
+                            // Change app
                             getHandler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -273,11 +282,13 @@ public class MyoInfoView extends RelativeLayout implements
                                     } catch (Exception ignored) {}
                                 }
                             }, 3000);
-                            isShowing = false;
+
+
                         }
 
                     }
                 });
+            }
             mLastEmgUpdate = System.currentTimeMillis();
         }
     }
@@ -324,5 +335,16 @@ public class MyoInfoView extends RelativeLayout implements
 
     public void setContextCustom(Activity activity) {
         ctx = activity;
+    }
+
+    private Activity getActivity() {
+        Context context = getContext();
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity)context;
+            }
+            context = ((ContextWrapper)context).getBaseContext();
+        }
+        return null;
     }
 }

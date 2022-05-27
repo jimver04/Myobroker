@@ -1,7 +1,9 @@
 package com.infalia.myonabler.myobroker;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.AssetFileDescriptor;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Context ctx;
     private boolean isOQ2 = true;
     MediaPlayer player;
+    public boolean isOnTop = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
                     TextView textView_hint1 = findViewById(R.id.textView_hint1);
                     textView_hint1.setVisibility(TextView.INVISIBLE);
-
 
                     TextView textView_hint2 = findViewById(R.id.textView_hint2);
                     textView_hint2.setVisibility(TextView.VISIBLE);
@@ -153,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
 
 //    void speakInit(){

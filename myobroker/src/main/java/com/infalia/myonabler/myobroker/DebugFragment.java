@@ -44,8 +44,7 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
         Logy.sLoglevel = Logy.VERBOSE;
         Log.w("Myonabler", "onCreate DebugFrament");
 
-        mMyoConnector = new MyoConnector(getActivity());
-        mMyoConnector.scan(2000, mScannerCallback);
+
         super.onCreate(savedInstanceState);
     }
 
@@ -60,7 +59,8 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-
+        mMyoConnector = new MyoConnector(getActivity());
+        mMyoConnector.scan(2000, mScannerCallback);
 
         super.onActivityCreated(savedInstanceState);
 
@@ -87,12 +87,8 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
                 @Override
                 public void run() {
 
-                    Log.d("Myonabler", "DebugFragment ScannerCallback 3");
-
                     if (getView() == null)
                         return;
-
-                    Log.d("Myonabler", "DebugFragment ScannerCallback 4 ");
 
                     for (final Myo myo : myos) {
                         if (!mMyoViewMap.containsKey(myo)) {
@@ -101,7 +97,7 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
                             infoView.setContextCustom(getActivity());
 
 
-                            Log.e("Myonabler", "Found");
+                            Log.d("Myonabler", "Found");
 
                             myo.addConnectionListener(DebugFragment.this);
                             myo.connect();
