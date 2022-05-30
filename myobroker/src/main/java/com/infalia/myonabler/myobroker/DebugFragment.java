@@ -7,6 +7,7 @@ package com.infalia.myonabler.myobroker;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +46,8 @@ public class DebugFragment extends Fragment implements BaseMyo.ConnectionListene
         Logy.sLoglevel = Logy.VERBOSE;
         Log.w("Myonabler", "onCreate DebugFrament");
 
+
+        //Toast.makeText((Context)getActivity(), "DebugFrament", Toast.LENGTH_LONG ).show();
 
         super.onCreate(savedInstanceState);
     }

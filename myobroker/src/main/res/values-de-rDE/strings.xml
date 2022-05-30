@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Myo Vermittler</string>
-    <string name="action_settings" translatable="false">Einstellungen Myo</string>
     <string name="my_myo">Mein Myo</string>
     <string name="myo_message_calibrate1">Nur einen Moment, um das Myo-Gerät an Ihrer Wade einzurichten.</string>
     <string name="battery">Myo Akku:</string>

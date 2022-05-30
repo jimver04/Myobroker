@@ -240,6 +240,7 @@ public class MyoInfoView extends RelativeLayout implements
                         i.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                         ctx.sendBroadcast(i);
 
+
                         if (((MainActivity)getActivity()).isOnTop) {
 
                             //Toast.makeText(ctx, ctx.getText(R.string.success_myo_setup), Toast.LENGTH_LONG).show();
@@ -260,6 +261,10 @@ public class MyoInfoView extends RelativeLayout implements
                             // Show Green Tick
                             final GifImageView green_tick = getActivity().findViewById(R.id.green_tick);
                             green_tick.setVisibility(GifImageView.VISIBLE);
+
+
+                            TextView textView_hint2 = getActivity().findViewById(R.id.textView_hint2);
+                            textView_hint2.setVisibility(TextView.GONE);
 
                             final Handler handler = new Handler(Looper.getMainLooper());
                             handler.postDelayed(new Runnable() {

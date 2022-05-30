@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Εύρεση Myo</string>
-    <string name="action_settings">Ρυθμίσεις Myo</string>
     <string name="my_myo">To Μyo μου</string>
     <string name="myo_message_calibrate1">Μια στιγμή να ρυθμίσουμε το Myo στην γάμπα σας.</string>
     <string name="battery">Μπαταρία Myo:</string>

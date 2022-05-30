@@ -10,6 +10,7 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.speech.tts.TextToSpeech;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         registerBaseActivityReceiver();
+        ctx = this;
+        Toast.makeText(ctx, "-------", Toast.LENGTH_LONG ).show();
 
         ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -123,8 +127,16 @@ public class MainActivity extends AppCompatActivity {
     public class BaseActivityReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+
+            Toast.makeText(ctx, "Receiving intent:" + intent.getAction() , Toast.LENGTH_LONG ).show();
+
             if(intent.getAction().equals(FINISH_ALL_ACTIVITIES_ACTIVITY_ACTION)){
-                finish();
+                Toast.makeText(ctx, "Closing Myobroker", Toast.LENGTH_LONG ).show();
+                if(Build.VERSION.SDK_INT>=16 && Build.VERSION.SDK_INT<21){
+                    finishAffinity();
+                } else if(Build.VERSION.SDK_INT>=21){
+                    finishAndRemoveTask();
+                }
             }
         }
     }
