@@ -227,7 +227,7 @@ public class MyoInfoView extends RelativeLayout implements
 
     @Override
     public void onNewEmgData(final EmgData emgData) {
-        if (System.currentTimeMillis() - mLastEmgUpdate > 10) {
+        if (System.currentTimeMillis() - mLastEmgUpdate > 20) {
             if (getHandler() != null) {
                 getHandler().post(new Runnable() {
                     @Override
